@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>歡迎來到我的應用程式</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <div>
+            <h2>管理使用者</h2>
+        </div>
+        <div>
+            <a class="h3" th:href="@{/users/new}">新增使用者</a>
+        </div>
+
+        <div th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+
+        <div>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>編號</th>
+                    <th>信箱</th>
+                    <th>姓氏</th>
+                    <th>名字</th>
+                    <th>是否啟用</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="user : ${listUsers}">
+                        <tr>
+                            <td>[[${user.id}]]</td>
+                            <td>[[${user.email}]]</td>
+                            <td>[[${user.firstName}]]</td>
+                            <td>[[${user.lastName}]]</td>
+                            <td>[[${user.enabled}]]</td>
+                            <td>
+                                <a class="h4" mr-3 th:href="@{'/users/edit/' + ${user.id}}">修改</a>
+                                <a class="h4" th:href="@{'/users/delete/' + ${user.id}}">刪除</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
